@@ -1,0 +1,125 @@
+﻿@model List<BdShop.Database.Ordered>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Orders</li>
+
+    </ol>
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Orders Details
+            @*<a href="../Product/Create" class="btn btn-info pull-right fa fa-plus">Add New</a>*@
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-bordered table-striped table" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+
+                            <th>Serial No.</th>
+                            <th>Order Id</th>
+                            @*<th>Payment Id</th>*@
+                            <th>Shipping Id</th>
+                            <th>Discount</th>
+                            <th>Taxes</th>
+                            <th>Total Amount</th>
+                            <th>Order Date</th>
+                            <th>Status</th>
+                            @*<th>Stock</th>
+                                <th>OnOrder</th>
+                                <th>Available</th>
+                                <th>Image</th>*@
+                            <th>Action</th>
+
+                        </tr>
+                    </thead>
+                    @*<tfoot>
+
+                            <tr>
+
+                                <th>Serial No.</th>
+                                <th>Category</th>
+                                <th>District</th>
+                                <th>Description</th>
+                                <th>Unit Price</th>
+                                <th>Old Price</th>
+                                <th>Discount</th>
+                                <th>Stock</th>
+                                <th>OnOrder</th>
+                                <th>Available</th>
+                                <th>Image</th>
+                                <th>Action</th>
+
+                            </tr>
+                        </tfoot>*@
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            //int count = 1;
+                            <tr>
+                                <td>@(Model.IndexOf(item)+1)</td>
+                                @*<td>@item.ProID</td>*@
+                                <td>@item.OrderedID</td>
+                                @*<td>@item.Payment.PaymentID</td>*@
+                                <td>@item.ShippingDetail.ShippingID</td>
+                                <td>@item.Discount</td>
+                                <td>@item.Taxes</td>
+                                <td>@item.TotalAmount</td>
+                                <td>@item.OrderDate</td>
+                                @if (item.Shipped == true && item.Deliver == false)
+                                {
+                                    <td>Shipped</td>
+                                }
+                                else if (item.Shipped == true && item.Deliver == true)
+                                {
+                                    <td>Delivered</td>
+
+                                }
+                                else if (item.CancelOrder == true)
+                                {
+                                    <td>Cancled</td>
+
+                                }
+                                else
+                                {
+                                    <td>On Process</td>
+
+                                }
+
+
+                                @*<td>@item.UnitInStock</td>
+                                    <td>@item.UnitOnOrder</td>
+                                    <td>@item.ProductAvailable</td>*@
+                                @*<td><img src="@item.ImageURL" style="width:100px; height:67px;" /></td>*@
+                                @*<td><a href="@Url.Content(item.ImageURL)" target="_blank"><img src="@Url.Content(item.ImageURL)" style="width:100px; height:67px;" /></a></td>*@
+                                <td>
+
+                                    <a href="@Url.Action("Edit", "Order", new { id = item.OrderedID})" class="btn btn-primary">Edit</a>
+                                    <a href="@Url.Action("Details", "Order", new { id = item.OrderedID})" class="btn btn-warning">Details</a>
+
+
+                                </td>
+
+
+
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+

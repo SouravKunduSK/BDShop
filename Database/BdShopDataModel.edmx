@@ -1,0 +1,1426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BdShopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="255" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictID" />
+          </Key>
+          <Property Name="DistrictID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DistrictName" Type="nvarchar" MaxLength="255" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="genMainSlider">
+          <Key>
+            <PropertyRef Name="MainSliderID" />
+          </Key>
+          <Property Name="MainSliderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="AltText" Type="nvarchar" MaxLength="255" />
+          <Property Name="OfferTag" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="BtnText" Type="nvarchar" MaxLength="255" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="genPromoRight">
+          <Key>
+            <PropertyRef Name="PromoRightID" />
+          </Key>
+          <Property Name="PromoRightID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="SubCategoryID" Type="int" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="AltText" Type="nvarchar" MaxLength="255" />
+          <Property Name="OfferTag" Type="nvarchar" MaxLength="255" />
+          <Property Name="Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderedID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OrderDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Ordered">
+          <Key>
+            <PropertyRef Name="OrderedID" />
+          </Key>
+          <Property Name="OrderedID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="PaymentID" Type="int" />
+          <Property Name="ShippingID" Type="int" />
+          <Property Name="Discount" Type="int" />
+          <Property Name="Taxes" Type="int" />
+          <Property Name="TotalAmount" Type="int" />
+          <Property Name="isCompleted" Type="bit" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Dispatched" Type="bit" />
+          <Property Name="DispatchedDate" Type="datetime" />
+          <Property Name="Shipped" Type="bit" />
+          <Property Name="ShippedDate" Type="datetime" />
+          <Property Name="Deliver" Type="bit" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="CancelDate" Type="datetime" />
+          <Property Name="CancelOrder" Type="bit" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentType" Type="int" />
+          <Property Name="CreditAmount" Type="money" />
+          <Property Name="DebtAmount" Type="money" />
+          <Property Name="Balance" Type="money" />
+          <Property Name="PaymentDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PaymentTypeName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="255" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="QuantityPerUnit" Type="nvarchar" MaxLength="255" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="OldPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitWeight" Type="nvarchar" MaxLength="255" />
+          <Property Name="Size" Type="nvarchar" MaxLength="255" />
+          <Property Name="Discount" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="UnitInStock" Type="int" />
+          <Property Name="UnitOnOrder" Type="int" />
+          <Property Name="ProductAvailable" Type="bit" />
+          <Property Name="AltText" Type="nvarchar" MaxLength="255" />
+          <Property Name="AddBadge" Type="bit" />
+          <Property Name="OfferTitle" Type="nvarchar" MaxLength="255" />
+          <Property Name="OfferBadgeClass" Type="nvarchar" MaxLength="255" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Picture1" Type="nvarchar(max)" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="isDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="RecentlyViews">
+          <Key>
+            <PropertyRef Name="RViewID" />
+          </Key>
+          <Property Name="RViewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="ViewDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewID" />
+          </Key>
+          <Property Name="ReviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Username" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Review" Type="nvarchar" MaxLength="255" />
+          <Property Name="Rate" Type="int" />
+          <Property Name="DateTime" Type="datetime" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="SellerID" />
+          </Key>
+          <Property Name="SellerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="RoleType" Type="int" />
+          <Property Name="PassCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ShippingDetail">
+          <Key>
+            <PropertyRef Name="ShippingID" />
+          </Key>
+          <Property Name="ShippingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="DistrictID" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Password" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="DistrictID" Type="int" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="Email" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="255" />
+          <Property Name="RoleType" Type="int" />
+          <Property Name="PassCode" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="WishlistID" />
+          </Key>
+          <Property Name="WishlistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BdShop.dbo.getallorderusers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="getallorderusers">
+          <Key>
+            <PropertyRef Name="OrderedID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="OrderedID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TotalAmount" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Deliver" Type="bit" />
+          <Property Name="Shipped" Type="bit" />
+          <Property Name="CancelOrder" Type="bit" />
+          <Property Name="DeliveryDate" Type="datetime" />
+          <Property Name="ShippedDate" Type="datetime" />
+          <Property Name="CancelDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK__genPromoR__Categ__49C3F6B7">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="genPromoRight" Type="Self.genPromoRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="genPromoRight">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__47DBAE45">
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordered">
+              <PropertyRef Name="OrderedID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Produ__4F7CD00D">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__Payment__46E78A0C">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__Shippin__4E88ABD4">
+          <End Role="ShippingDetail" Type="Self.ShippingDetail" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingDetail">
+              <PropertyRef Name="ShippingID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="ShippingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__UserID__44FF419A">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Payment__45F365D3">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__440B1D61">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecentlyV__Produ__4BAC3F29">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="RecentlyViews" Type="Self.RecentlyViews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="RecentlyViews">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecentlyV__UserI__4AB81AF0">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="RecentlyViews" Type="Self.RecentlyViews" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecentlyViews">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__ProductI__5165187F">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__UserID__5070F446">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seller__RoleType__4222D4EF">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="RoleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingD__Distr__48CFD27E">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="ShippingDetail" Type="Self.ShippingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictID" />
+            </Principal>
+            <Dependent Role="ShippingDetail">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__DistrictID__4316F928">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleType__412EB0B6">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wishlist__Produc__4D94879B">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wishlist__UserID__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BdShopModelStoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genMainSlider" EntityType="Self.genMainSlider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="genPromoRight" EntityType="Self.genPromoRight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordered" EntityType="Self.Ordered" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentType" EntityType="Self.PaymentType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecentlyViews" EntityType="Self.RecentlyViews" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShippingDetail" EntityType="Self.ShippingDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="getallorderusers" EntityType="Self.getallorderusers" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [getallorderusers].[OrderedID] AS [OrderedID], 
+    [getallorderusers].[UserID] AS [UserID], 
+    [getallorderusers].[FirstName] AS [FirstName], 
+    [getallorderusers].[LastName] AS [LastName], 
+    [getallorderusers].[TotalAmount] AS [TotalAmount], 
+    [getallorderusers].[OrderDate] AS [OrderDate], 
+    [getallorderusers].[Deliver] AS [Deliver], 
+    [getallorderusers].[Shipped] AS [Shipped], 
+    [getallorderusers].[CancelOrder] AS [CancelOrder], 
+    [getallorderusers].[DeliveryDate] AS [DeliveryDate], 
+    [getallorderusers].[ShippedDate] AS [ShippedDate], 
+    [getallorderusers].[CancelDate] AS [CancelDate]
+    FROM [dbo].[getallorderusers] AS [getallorderusers]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__genPromoR__Categ__49C3F6B7" Association="Self.FK__genPromoR__Categ__49C3F6B7">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="genPromoRight" EntitySet="genPromoRight" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__47DBAE45" Association="Self.FK__OrderDeta__Order__47DBAE45">
+            <End Role="Ordered" EntitySet="Ordered" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Produ__4F7CD00D" Association="Self.FK__OrderDeta__Produ__4F7CD00D">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__Payment__46E78A0C" Association="Self.FK__Ordered__Payment__46E78A0C">
+            <End Role="Payment" EntitySet="Payment" />
+            <End Role="Ordered" EntitySet="Ordered" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__Shippin__4E88ABD4" Association="Self.FK__Ordered__Shippin__4E88ABD4">
+            <End Role="ShippingDetail" EntitySet="ShippingDetail" />
+            <End Role="Ordered" EntitySet="Ordered" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__UserID__44FF419A" Association="Self.FK__Ordered__UserID__44FF419A">
+            <End Role="User" EntitySet="User" />
+            <End Role="Ordered" EntitySet="Ordered" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Payment__45F365D3" Association="Self.FK__Payment__Payment__45F365D3">
+            <End Role="PaymentType" EntitySet="PaymentType" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__440B1D61" Association="Self.FK__Product__Categor__440B1D61">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecentlyV__Produ__4BAC3F29" Association="Self.FK__RecentlyV__Produ__4BAC3F29">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="RecentlyViews" EntitySet="RecentlyViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecentlyV__UserI__4AB81AF0" Association="Self.FK__RecentlyV__UserI__4AB81AF0">
+            <End Role="User" EntitySet="User" />
+            <End Role="RecentlyViews" EntitySet="RecentlyViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__ProductI__5165187F" Association="Self.FK__Review__ProductI__5165187F">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__UserID__5070F446" Association="Self.FK__Review__UserID__5070F446">
+            <End Role="User" EntitySet="User" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seller__RoleType__4222D4EF" Association="Self.FK__Seller__RoleType__4222D4EF">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Seller" EntitySet="Seller" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingD__Distr__48CFD27E" Association="Self.FK__ShippingD__Distr__48CFD27E">
+            <End Role="District" EntitySet="District" />
+            <End Role="ShippingDetail" EntitySet="ShippingDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__DistrictID__4316F928" Association="Self.FK__User__DistrictID__4316F928">
+            <End Role="District" EntitySet="District" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleType__412EB0B6" Association="Self.FK__User__RoleType__412EB0B6">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__Produc__4D94879B" Association="Self.FK__Wishlist__Produc__4D94879B">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__UserID__4CA06362" Association="Self.FK__Wishlist__UserID__4CA06362">
+            <End Role="User" EntitySet="User" />
+            <End Role="Wishlist" EntitySet="Wishlist" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BdShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="genPromoRights" Relationship="Self.FK__genPromoR__Categ__49C3F6B7" FromRole="Category" ToRole="genPromoRight" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__Categor__440B1D61" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictID" />
+          </Key>
+          <Property Name="DistrictID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DistrictName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="ShippingDetails" Relationship="Self.FK__ShippingD__Distr__48CFD27E" FromRole="District" ToRole="ShippingDetail" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__User__DistrictID__4316F928" FromRole="District" ToRole="User" />
+        </EntityType>
+        <EntityType Name="genMainSlider">
+          <Key>
+            <PropertyRef Name="MainSliderID" />
+          </Key>
+          <Property Name="MainSliderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AltText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OfferTag" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BtnText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="genPromoRight">
+          <Key>
+            <PropertyRef Name="PromoRightID" />
+          </Key>
+          <Property Name="PromoRightID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="SubCategoryID" Type="Int32" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AltText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OfferTag" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__genPromoR__Categ__49C3F6B7" FromRole="genPromoRight" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="OrderDetailsID" />
+          </Key>
+          <Property Name="OrderDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderedID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ordered" Relationship="Self.FK__OrderDeta__Order__47DBAE45" FromRole="OrderDetails" ToRole="Ordered" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__4F7CD00D" FromRole="OrderDetails" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Ordered">
+          <Key>
+            <PropertyRef Name="OrderedID" />
+          </Key>
+          <Property Name="OrderedID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="PaymentID" Type="Int32" />
+          <Property Name="ShippingID" Type="Int32" />
+          <Property Name="Discount" Type="Int32" />
+          <Property Name="Taxes" Type="Int32" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="isCompleted" Type="Boolean" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Dispatched" Type="Boolean" />
+          <Property Name="DispatchedDate" Type="DateTime" Precision="3" />
+          <Property Name="Shipped" Type="Boolean" />
+          <Property Name="ShippedDate" Type="DateTime" Precision="3" />
+          <Property Name="Deliver" Type="Boolean" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelOrder" Type="Boolean" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__47DBAE45" FromRole="Ordered" ToRole="OrderDetails" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Ordered__Payment__46E78A0C" FromRole="Ordered" ToRole="Payment" />
+          <NavigationProperty Name="ShippingDetail" Relationship="Self.FK__Ordered__Shippin__4E88ABD4" FromRole="Ordered" ToRole="ShippingDetail" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Ordered__UserID__44FF419A" FromRole="Ordered" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentType" Type="Int32" />
+          <Property Name="CreditAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="DebtAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Balance" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PaymentDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Ordereds" Relationship="Self.FK__Ordered__Payment__46E78A0C" FromRole="Payment" ToRole="Ordered" />
+          <NavigationProperty Name="PaymentType1" Relationship="Self.FK__Payment__Payment__45F365D3" FromRole="Payment" ToRole="PaymentType" />
+        </EntityType>
+        <EntityType Name="PaymentType">
+          <Key>
+            <PropertyRef Name="PaymentTypeID" />
+          </Key>
+          <Property Name="PaymentTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentTypeName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payment__Payment__45F365D3" FromRole="PaymentType" ToRole="Payment" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="QuantityPerUnit" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="OldPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitWeight" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="UnitInStock" Type="Int32" />
+          <Property Name="UnitOnOrder" Type="Int32" />
+          <Property Name="ProductAvailable" Type="Boolean" />
+          <Property Name="AltText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AddBadge" Type="Boolean" />
+          <Property Name="OfferTitle" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="OfferBadgeClass" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Picture1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="isDelete" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__Categor__440B1D61" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__4F7CD00D" FromRole="Product" ToRole="OrderDetails" />
+          <NavigationProperty Name="RecentlyViews" Relationship="Self.FK__RecentlyV__Produ__4BAC3F29" FromRole="Product" ToRole="RecentlyViews" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__ProductI__5165187F" FromRole="Product" ToRole="Review" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK__Wishlist__Produc__4D94879B" FromRole="Product" ToRole="Wishlist" />
+        </EntityType>
+        <EntityType Name="RecentlyView">
+          <Key>
+            <PropertyRef Name="RViewID" />
+          </Key>
+          <Property Name="RViewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="ViewDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__RecentlyV__Produ__4BAC3F29" FromRole="RecentlyViews" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK__RecentlyV__UserI__4AB81AF0" FromRole="RecentlyViews" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="ReviewID" />
+          </Key>
+          <Property Name="ReviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Review1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="Int32" />
+          <Property Name="DateTime" Type="DateTime" Precision="3" />
+          <Property Name="isDeleted" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Review__ProductI__5165187F" FromRole="Review" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Review__UserID__5070F446" FromRole="Review" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sellers" Relationship="Self.FK__Seller__RoleType__4222D4EF" FromRole="Role" ToRole="Seller" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__User__RoleType__412EB0B6" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="SellerID" />
+          </Key>
+          <Property Name="SellerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="RoleType" Type="Int32" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__Seller__RoleType__4222D4EF" FromRole="Seller" ToRole="Role" />
+          <Property Name="PassCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ShippingDetail">
+          <Key>
+            <PropertyRef Name="ShippingID" />
+          </Key>
+          <Property Name="ShippingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DistrictID" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="District" Relationship="Self.FK__ShippingD__Distr__48CFD27E" FromRole="ShippingDetail" ToRole="District" />
+          <NavigationProperty Name="Ordereds" Relationship="Self.FK__Ordered__Shippin__4E88ABD4" FromRole="ShippingDetail" ToRole="Ordered" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DistrictID" Type="Int32" />
+          <Property Name="PostalCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Mobile" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="RoleType" Type="Int32" />
+          <NavigationProperty Name="District" Relationship="Self.FK__User__DistrictID__4316F928" FromRole="User" ToRole="District" />
+          <NavigationProperty Name="Ordereds" Relationship="Self.FK__Ordered__UserID__44FF419A" FromRole="User" ToRole="Ordered" />
+          <NavigationProperty Name="RecentlyViews" Relationship="Self.FK__RecentlyV__UserI__4AB81AF0" FromRole="User" ToRole="RecentlyViews" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK__Review__UserID__5070F446" FromRole="User" ToRole="Review" />
+          <NavigationProperty Name="Role" Relationship="Self.FK__User__RoleType__412EB0B6" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Wishlists" Relationship="Self.FK__Wishlist__UserID__4CA06362" FromRole="User" ToRole="Wishlist" />
+          <Property Name="PassCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Wishlist">
+          <Key>
+            <PropertyRef Name="WishlistID" />
+          </Key>
+          <Property Name="WishlistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__Wishlist__Produc__4D94879B" FromRole="Wishlist" ToRole="Product" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Wishlist__UserID__4CA06362" FromRole="Wishlist" ToRole="User" />
+        </EntityType>
+        <EntityType Name="getallorderuser">
+          <Key>
+            <PropertyRef Name="OrderedID" />
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="OrderedID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TotalAmount" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Deliver" Type="Boolean" />
+          <Property Name="Shipped" Type="Boolean" />
+          <Property Name="CancelOrder" Type="Boolean" />
+          <Property Name="DeliveryDate" Type="DateTime" Precision="3" />
+          <Property Name="ShippedDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK__genPromoR__Categ__49C3F6B7">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="genPromoRight" Type="Self.genPromoRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="genPromoRight">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__Categor__440B1D61">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShippingD__Distr__48CFD27E">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="ShippingDetail" Type="Self.ShippingDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictID" />
+            </Principal>
+            <Dependent Role="ShippingDetail">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__DistrictID__4316F928">
+          <End Role="District" Type="Self.District" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="District">
+              <PropertyRef Name="DistrictID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="DistrictID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Order__47DBAE45">
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordered">
+              <PropertyRef Name="OrderedID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="OrderedID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__Produ__4F7CD00D">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__Payment__46E78A0C">
+          <End Role="Payment" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payment">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__Shippin__4E88ABD4">
+          <End Role="ShippingDetail" Type="Self.ShippingDetail" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShippingDetail">
+              <PropertyRef Name="ShippingID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="ShippingID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ordered__UserID__44FF419A">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Ordered" Type="Self.Ordered" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Ordered">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payment__Payment__45F365D3">
+          <End Role="PaymentType" Type="Self.PaymentType" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentType">
+              <PropertyRef Name="PaymentTypeID" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PaymentType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecentlyV__Produ__4BAC3F29">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="RecentlyViews" Type="Self.RecentlyView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="RecentlyViews">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__ProductI__5165187F">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wishlist__Produc__4D94879B">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RecentlyV__UserI__4AB81AF0">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="RecentlyViews" Type="Self.RecentlyView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="RecentlyViews">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Review__UserID__5070F446">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Seller__RoleType__4222D4EF">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="RoleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__User__RoleType__412EB0B6">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Wishlist__UserID__4CA06362">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Wishlist">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BdShopEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="genMainSliders" EntityType="Self.genMainSlider" />
+          <EntitySet Name="genPromoRights" EntityType="Self.genPromoRight" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Ordereds" EntityType="Self.Ordered" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="PaymentTypes" EntityType="Self.PaymentType" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="RecentlyViews" EntityType="Self.RecentlyView" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
+          <EntitySet Name="ShippingDetails" EntityType="Self.ShippingDetail" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Wishlists" EntityType="Self.Wishlist" />
+          <EntitySet Name="getallorderusers" EntityType="Self.getallorderuser" />
+          <AssociationSet Name="FK__genPromoR__Categ__49C3F6B7" Association="Self.FK__genPromoR__Categ__49C3F6B7">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="genPromoRight" EntitySet="genPromoRights" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__Categor__440B1D61" Association="Self.FK__Product__Categor__440B1D61">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShippingD__Distr__48CFD27E" Association="Self.FK__ShippingD__Distr__48CFD27E">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="ShippingDetail" EntitySet="ShippingDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__DistrictID__4316F928" Association="Self.FK__User__DistrictID__4316F928">
+            <End Role="District" EntitySet="Districts" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Order__47DBAE45" Association="Self.FK__OrderDeta__Order__47DBAE45">
+            <End Role="Ordered" EntitySet="Ordereds" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__Produ__4F7CD00D" Association="Self.FK__OrderDeta__Produ__4F7CD00D">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__Payment__46E78A0C" Association="Self.FK__Ordered__Payment__46E78A0C">
+            <End Role="Payment" EntitySet="Payments" />
+            <End Role="Ordered" EntitySet="Ordereds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__Shippin__4E88ABD4" Association="Self.FK__Ordered__Shippin__4E88ABD4">
+            <End Role="ShippingDetail" EntitySet="ShippingDetails" />
+            <End Role="Ordered" EntitySet="Ordereds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ordered__UserID__44FF419A" Association="Self.FK__Ordered__UserID__44FF419A">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Ordered" EntitySet="Ordereds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payment__Payment__45F365D3" Association="Self.FK__Payment__Payment__45F365D3">
+            <End Role="PaymentType" EntitySet="PaymentTypes" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecentlyV__Produ__4BAC3F29" Association="Self.FK__RecentlyV__Produ__4BAC3F29">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="RecentlyViews" EntitySet="RecentlyViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__ProductI__5165187F" Association="Self.FK__Review__ProductI__5165187F">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__Produc__4D94879B" Association="Self.FK__Wishlist__Produc__4D94879B">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RecentlyV__UserI__4AB81AF0" Association="Self.FK__RecentlyV__UserI__4AB81AF0">
+            <End Role="User" EntitySet="Users" />
+            <End Role="RecentlyViews" EntitySet="RecentlyViews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Review__UserID__5070F446" Association="Self.FK__Review__UserID__5070F446">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Seller__RoleType__4222D4EF" Association="Self.FK__Seller__RoleType__4222D4EF">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Seller" EntitySet="Sellers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__User__RoleType__412EB0B6" Association="Self.FK__User__RoleType__412EB0B6">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Wishlist__UserID__4CA06362" Association="Self.FK__Wishlist__UserID__4CA06362">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Wishlist" EntitySet="Wishlists" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BdShopModelStoreContainer" CdmEntityContainer="BdShopEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="BdShopModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="BdShopModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genMainSliders">
+            <EntityTypeMapping TypeName="BdShopModel.genMainSlider">
+              <MappingFragment StoreEntitySet="genMainSlider">
+                <ScalarProperty Name="MainSliderID" ColumnName="MainSliderID" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="AltText" ColumnName="AltText" />
+                <ScalarProperty Name="OfferTag" ColumnName="OfferTag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="BtnText" ColumnName="BtnText" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genPromoRights">
+            <EntityTypeMapping TypeName="BdShopModel.genPromoRight">
+              <MappingFragment StoreEntitySet="genPromoRight">
+                <ScalarProperty Name="PromoRightID" ColumnName="PromoRightID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="AltText" ColumnName="AltText" />
+                <ScalarProperty Name="OfferTag" ColumnName="OfferTag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="BdShopModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="OrderDetailsID" ColumnName="OrderDetailsID" />
+                <ScalarProperty Name="OrderedID" ColumnName="OrderedID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordereds">
+            <EntityTypeMapping TypeName="BdShopModel.Ordered">
+              <MappingFragment StoreEntitySet="Ordered">
+                <ScalarProperty Name="OrderedID" ColumnName="OrderedID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Taxes" ColumnName="Taxes" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="isCompleted" ColumnName="isCompleted" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Dispatched" ColumnName="Dispatched" />
+                <ScalarProperty Name="DispatchedDate" ColumnName="DispatchedDate" />
+                <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="Deliver" ColumnName="Deliver" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="CancelOrder" ColumnName="CancelOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="BdShopModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PaymentType" ColumnName="PaymentType" />
+                <ScalarProperty Name="CreditAmount" ColumnName="CreditAmount" />
+                <ScalarProperty Name="DebtAmount" ColumnName="DebtAmount" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PaymentDateTime" ColumnName="PaymentDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentTypes">
+            <EntityTypeMapping TypeName="BdShopModel.PaymentType">
+              <MappingFragment StoreEntitySet="PaymentType">
+                <ScalarProperty Name="PaymentTypeID" ColumnName="PaymentTypeID" />
+                <ScalarProperty Name="PaymentTypeName" ColumnName="PaymentTypeName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BdShopModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="QuantityPerUnit" ColumnName="QuantityPerUnit" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="OldPrice" ColumnName="OldPrice" />
+                <ScalarProperty Name="UnitWeight" ColumnName="UnitWeight" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="UnitInStock" ColumnName="UnitInStock" />
+                <ScalarProperty Name="UnitOnOrder" ColumnName="UnitOnOrder" />
+                <ScalarProperty Name="ProductAvailable" ColumnName="ProductAvailable" />
+                <ScalarProperty Name="AltText" ColumnName="AltText" />
+                <ScalarProperty Name="AddBadge" ColumnName="AddBadge" />
+                <ScalarProperty Name="OfferTitle" ColumnName="OfferTitle" />
+                <ScalarProperty Name="OfferBadgeClass" ColumnName="OfferBadgeClass" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Picture1" ColumnName="Picture1" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecentlyViews">
+            <EntityTypeMapping TypeName="BdShopModel.RecentlyView">
+              <MappingFragment StoreEntitySet="RecentlyViews">
+                <ScalarProperty Name="RViewID" ColumnName="RViewID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="BdShopModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="ReviewID" ColumnName="ReviewID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Review1" ColumnName="Review" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BdShopModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="BdShopModel.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="PassCode" ColumnName="PassCode" />
+                <ScalarProperty Name="SellerID" ColumnName="SellerID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShippingDetails">
+            <EntityTypeMapping TypeName="BdShopModel.ShippingDetail">
+              <MappingFragment StoreEntitySet="ShippingDetail">
+                <ScalarProperty Name="ShippingID" ColumnName="ShippingID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BdShopModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="PassCode" ColumnName="PassCode" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="DistrictID" ColumnName="DistrictID" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="RoleType" ColumnName="RoleType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wishlists">
+            <EntityTypeMapping TypeName="BdShopModel.Wishlist">
+              <MappingFragment StoreEntitySet="Wishlist">
+                <ScalarProperty Name="WishlistID" ColumnName="WishlistID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="getallorderusers">
+            <EntityTypeMapping TypeName="BdShopModel.getallorderuser">
+              <MappingFragment StoreEntitySet="getallorderusers">
+                <ScalarProperty Name="OrderedID" ColumnName="OrderedID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Deliver" ColumnName="Deliver" />
+                <ScalarProperty Name="Shipped" ColumnName="Shipped" />
+                <ScalarProperty Name="CancelOrder" ColumnName="CancelOrder" />
+                <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
+                <ScalarProperty Name="ShippedDate" ColumnName="ShippedDate" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

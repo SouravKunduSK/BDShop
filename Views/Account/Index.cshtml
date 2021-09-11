@@ -1,0 +1,97 @@
+﻿@model BdShop.Database.User
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<!-- product category -->
+<section id="aa-product-details">
+    <div class="container">
+        <h3>User Profile:</h3>
+
+        <hr />
+        <h3 style="color:red;">@TempData["msg"]</h3>
+        @*<div class="checkout-left">
+            <div class="simpleLens-container">
+                <input type="hidden" name="id" value="@Model.UserID" />
+                <div class="simpleLens-big-image-container"><a><img src="~/Uploads/@Model.Picture" class="simpleLens-big-image"></a></div>
+            </div>
+
+        </div>*@
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="aa-product-details-area">
+                    <div class="aa-product-details-content">
+                        <div class="row">
+
+                            <!-- Modal view slider -->
+                            <div class="col-md-5 col-sm-5 col-xs-12">
+                                <h3><strong>Profile Picture:</strong></h3><hr />
+                                <div class="aa-cartbox-img">
+                                    <input type="hidden" name="id" value="@Model.UserID" />
+                                    <div>
+                                        <a><img width="200px" , src="~/Uploads/@Model.Picture" style="height:200px"></a>
+
+                                        @*<div class="panel-group" id="accordion">*@
+                                            <!-- Billing Details -->
+                                            <div>
+                                                @*<div class="panel-heading">
+                                                    <stong>
+                                                        <h4 class="panel-title">
+
+                                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                                                Update Profile Picture
+
+                                                            </a>
+
+                                                        </h4>
+                                                    </stong>
+                                                </div>*@
+                                                <div  class="panel-group">
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <a href="@Url.Action("Edit", "Account", new { id = Model.UserID})" class="aa-browse-btn">Edit Profile</a>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @*</div>*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!-- Modal view content -->
+                            <div class="col-md-7 col-sm-7 col-xs-12">
+                                <h3><strong>User Details:</strong></h3>
+                                <hr />
+                                <div class="aa-product-view-content">
+
+                                    <h3>Name: <strong>@Model.FirstName @Model.LastName </strong> </h3>
+                                    <h3>Email: <strong>@Model.Email </strong> </h3>
+                                    <h3>Mobile No: <strong>@Model.Mobile </strong></h3>
+                                    <h3>Registered Date: <strong>@Model.Created </strong> </h3>
+                                    <h3>Edited Date: <strong>@Model.Modified </strong> </h3>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Related product -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

@@ -1,0 +1,55 @@
+﻿@model BdShop.Database.Product
+
+@*@if (Model.UnitInStock > 0)
+    {
+        <a class="aa-add-to-cart-btn" href="@(Session["username"] != null ? Url.Action("AddToCart", "Products", new { id=Model.ProductID}) : Url.Action("Login", "Account"))">Add To Cart</a> }
+    else
+    {
+        <a class="aa-add-to-cart-btn" ))">Add To Cart</a>}*@
+<!-- start single product item -->
+<li>
+    <figure>
+        <a class="aa-product-img" href="@Url.Action("ViewDetails", "Products", new { id = Model.ProductID })"><img style="height:300px; width:250px" src="~/Uploads/@Url.Content(Model.Picture1)" alt="@Model.AltText"></a>
+        @if (Model.UnitInStock > 0)
+        {
+            <a class="aa-add-card-btn" href="@(Session["username"] != null ? Url.Action("AddToCart", "Products", new { id = @Model.ProductID }) : Url.Action("Login", "Account"))"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+        }
+        else
+        {
+            <a class="aa-add-card-btn text-danger">Out Of Stock!</a>
+        }
+        <figcaption>
+            <h4 class="aa-product-title"><a href="#">@Model.ProductName</a></h4>
+            <h6 class="aa-product-title">(@Model.QuantityPerUnit)</h6>
+            <span class="aa-product-price">
+                <del>
+                    @if (Model.OldPrice != null)
+                    {
+                        <text>Rs.@Model.OldPrice </text>}
+                </del>
+            </span>
+            <span class="aa-product-price"> RS.@Model.UnitPrice</span>
+        </figcaption>
+    </figure>
+    <div class="aa-product-hvr-content">
+        <a href="@(Session["username"]!=null ? Url.Action("WishList","Products", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Add to Wishlist"><span class="fa fa-heart-o"></span></a>
+        <a href="@Url.Action("ViewDetails", "Products", new { id = Model.ProductID })" title="View Details" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
+
+
+    </div>
+    @if (Model.AddBadge == true)
+    {
+        if (Model.OfferBadgeClass == "2")
+        {
+            <span class="aa-badge aa-sold-out" href="#">@Model.OfferTitle</span>
+        }
+        else if (Model.OfferBadgeClass == "1")
+        {
+        <span class="aa-badge aa-sale" href="#">@Model.OfferTitle</span>
+        }
+    }
+
+    @{ TempData["returnURL"] = Request.RawUrl; }
+</li>
+
+

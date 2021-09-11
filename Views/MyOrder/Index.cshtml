@@ -1,0 +1,155 @@
+﻿@model List<BdShop.Database.getallorderuser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- catg header banner section -->
+<section id="aa-catg-head-banner">
+    <img src="~/Content/img/fashion/fashion-header-bg-8.jpg" alt="fashion img">
+    <div class="aa-catg-head-banner-area">
+        <div class="container">
+            <div class="aa-catg-head-banner-content">
+                <h2>My Orders</h2>
+                <ol class="breadcrumb">
+                    <li><a href="index.html">Home</a></li>
+                    <li class="active">Orders</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / catg header banner section -->
+<!-- Cart view section -->
+<section id="cart-view">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="cart-view-area">
+                    @using (Html.BeginForm("Index", "MyOrder", FormMethod.Post))
+                    {
+                        <div class="cart-view-table">
+                            <form action="">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+
+                                                <th>Serial No.</th>
+                                                <th>Order ID</th>
+                                                <th>Total Amount</th>
+                                                <th>Order Date</th>
+                                                <th>Status</th>
+                                                <th>Date & Time</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                            <tr>
+                                                <td>@(Model.IndexOf(item)+1)</td>
+
+                                                <td>@item.OrderedID</td>
+                                                <td>@item.TotalAmount</td>
+                                                <td>@item.OrderDate</td>
+                                                @if (item.Shipped == true && item.Deliver == false)
+                                                {
+                                                    <td>Shipped</td>
+                                                }
+                                                else if (item.Shipped == true && item.Deliver == true)
+                                                {
+                                                    <td>Delivered</td>
+
+                                                }
+                                                else if (item.CancelOrder == true)
+                                                {
+                                                    <td>Cancled</td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td>On Process</td>
+
+                                                }
+
+
+                                                @if (item.Shipped == true && item.Deliver == false)
+                                                {
+                                                    <td>Shipping On :@item.ShippedDate</td>
+                                                }
+                                                else if (item.Shipped == true && item.Deliver == true)
+                                                {
+                                                    <td>Delivered On :@item.DeliveryDate</td>
+
+                                                }
+                                                else if (item.CancelOrder == true)
+                                                {
+                                                    <td>Cancled On : @item.CancelDate</td>
+
+                                                }
+                                                else
+                                                {
+                                                    <td> </td>
+                                                }
+
+
+                                                <td>
+
+                                                    @*<a href="@Url.Action("Edit", "Order", new { id = item.OrderedID})" class="btn btn-primary">Edit</a>*@
+                                                    <a href="@Url.Action("Details", "MyOrder", new { id = item.OrderedID})" class="btn btn-warning">Details</a>
+
+
+                                                </td>
+                                            </tr>
+                                            }
+
+
+                                        </tbody>
+
+                                        @*<tr>
+                                                <td colspan="5"><button type="submit" class="aa-cart-view-btn">Proced to Checkout</button></td>
+                                            </tr>*@
+                                    </table>
+                                </div>
+                            </form>
+                            <!-- Cart Total view -->
+                            @*<div class="cart-view-total">
+                                    <h4>Cart Totals</h4>
+                                    <table class="aa-totals-table">
+                                        <tbody>
+                                            <tr>
+                                                    <th>Subtotal</th>
+                                                    <td id="subTotal">00</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Discount</th>
+                                                    <td id="discount">0</td>
+                                                </tr>
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <th>Total Amount</th>
+                                                    <td id="totalAmount">@item.TotalAmount</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                        <tfoot>
+
+                                            <tr>
+                                                <td colspan="3"><button type="submit" class="aa-cart-view-btn">Proced to Checkout</button></td>
+                                            </tr>
+
+                                        </tfoot>
+                                    </table>
+
+                                </div>*@
+                        </div>}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- / Cart view section -->

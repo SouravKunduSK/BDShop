@@ -1,0 +1,77 @@
+﻿@model BdShop.Database.Ordered
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Orders</a>
+        </li>
+        @*<li class="breadcrumb-item ">Order Status</li>*@
+        <li class="breadcrumb-item active">Edit Order Status</li>
+
+
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Edit Status
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "Order", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(model => model.OrderedID)
+                @Html.HiddenFor(model => model.UserID)
+                @Html.HiddenFor(model => model.PaymentID)
+                @Html.HiddenFor(model => model.ShippingID)
+                @Html.HiddenFor(model => model.ShippedDate)
+                @Html.HiddenFor(model => model.DeliveryDate)
+                @Html.HiddenFor(model => model.Discount)
+                @Html.HiddenFor(model => model.Taxes)
+                @Html.HiddenFor(model => model.TotalAmount)
+                @Html.HiddenFor(model => model.OrderDate)
+                @Html.HiddenFor(model => model.isCompleted)
+                @Html.HiddenFor(model => model.ShippedDate)
+                @Html.HiddenFor(model => model.DeliveryDate)
+                @Html.HiddenFor(model => model.CancelDate)
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Shipped, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBox("Shipped")
+                        @Html.ValidationMessageFor(model => model.Shipped, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Deliver, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBox("Deliver")
+                        @Html.ValidationMessageFor(model => model.Deliver, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CancelOrder, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBox("CancelOrder")
+                        @Html.ValidationMessageFor(model => model.CancelOrder, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <a onclick="window.history.back();" class="btn btn-danger">Cancel</a>
+                <input type="submit" class="btn btn-primary" value="Update" />
+            }
+        </div>
+    </div>
+</div>
+
+

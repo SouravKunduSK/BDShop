@@ -1,0 +1,43 @@
+﻿@model BdShop.Database.Category
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Categories</a>
+        </li>
+        <li class="breadcrumb-item ">All Categories</li>
+        <li class="breadcrumb-item active">Edit Category Name</li>
+
+
+    </ol>
+    <!-- DataTables Example -->
+    <div class="card mb-3">
+        <div class="card-header">
+            <i class="fas fa-table"></i>
+            Edit Category
+
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Edit", "Category", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.CategoryID)
+
+                <div class="form-group">
+                    <label class="control-label">Category Name</label>
+
+                    @Html.TextBoxFor(m => m.CategoryName, new { @class = "form-control", placeholder = "Enter Category Name", required = "required", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(m => m.CategoryName, "", new { @class = "text-danger" })
+                </div>
+
+                <a onclick="window.history.back();" class="btn btn-danger">Cancel</a>
+                <input type="submit" class="btn btn-primary" value="Update" />
+            }
+        </div>
+    </div>
+</div>
