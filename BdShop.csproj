@@ -1882,6 +1882,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\pngwing.com %2825%29.png" />
+    <Content Include="Uploads\pngwing.com %2827%29.png" />
+    <Content Include="Uploads\pngwing.com %2831%29.png" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -1927,7 +1930,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
     <Folder Include="Views\LoadData\" />
   </ItemGroup>
   <ItemGroup>
